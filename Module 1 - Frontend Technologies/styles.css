@@ -1,0 +1,387 @@
+/* ─── CSS Ex2: CSS Syntax and Comments ─────────────────────────
+   Formatted rules with consistent indentation and descriptive
+   comments above each selector. */
+
+/* CSS Ex3: Universal selector * — reset margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS Ex4: body — fallback background color + background image */
+/* CSS Ex5: font-family applied from Google Font */
+body {
+  font-family: 'Nunito', sans-serif;
+  /* CSS Ex4: fallback background color (HEX) */
+  background-color: #f4f7f2;
+  /* CSS Ex4: subtle background image on body */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a7d44' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: #2c3e2d;
+  font-size: 16px;
+  /* CSS Ex5: line-height */
+  line-height: 1.65;
+}
+
+/* CSS Ex3: ID selector #mainHeader — styles the navbar */
+#mainHeader {
+  background: #285c30;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* CSS Ex3: element selector — style all <h2> headings */
+h2 {
+  font-family: 'Lora', serif;
+  /* CSS Ex5: font-family, font-size, font-weight */
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #285c30;
+  margin-bottom: 6px;
+  /* CSS Ex5: text-align */
+  text-align: left;
+}
+
+/* CSS Ex3: grouping selector — h3 and p share base style */
+h3, p {
+  color: #2c3e2d;
+}
+h3 { font-size: 1rem; font-weight: 700; }
+
+/* CSS Ex3: class selector .eventCard — event card containers */
+.eventCard {
+  background: #ffffff;
+  /* CSS Ex8: border */
+  border: 1px solid #d6e4d7;
+  border-radius: 10px;
+  /* CSS Ex8: padding */
+  padding: 20px;
+  /* CSS Ex8: margin */
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(58,125,68,.10);
+  transition: transform .2s, box-shadow .2s;
+}
+.eventCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 28px rgba(58,125,68,.14);
+}
+
+/* CSS Ex3: class selector .highlight — visual emphasis */
+.highlight {
+  background: #fffde7;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* ─── CSS Ex4: Color & Background ──────────────────────────── */
+
+/* CSS Ex4: linear-gradient on hero banner */
+.hero {
+  /* CSS Ex4: background gradient */
+  background: linear-gradient(135deg, #285c30 0%, #4a9e57 100%);
+  /* CSS Ex4: RGBA for text color overlay */
+  color: rgba(255, 255, 255, 0.95);
+  padding: 72px 0 60px;
+}
+.hero h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  /* CSS Ex5: line-height */
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+/* CSS Ex4: gradient on section headers */
+.section-header-gradient {
+  background: linear-gradient(90deg, #e8f5e9 0%, #ffffff 100%);
+  padding: 12px 20px;
+  border-left: 4px solid #3a7d44;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 20px;
+}
+
+/* CSS Ex4: RGBA for card background overlays */
+.colour-demo-rgba {
+  background: rgba(58, 125, 68, 0.12);
+  border: 1px solid rgba(58, 125, 68, 0.3);
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  /* CSS Ex4: HEX text color */
+  color: #1a3d20;
+}
+
+/* ─── CSS Ex5: Typography ───────────────────────────────────── */
+
+/* CSS Ex5: font-size, letter-spacing, line-height on descriptions */
+.section-lead {
+  font-size: 0.92rem;
+  color: #5a6b5b;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+.typography-demo h3 {
+  /* CSS Ex5: text-transform uppercase */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  color: #3a7d44;
+}
+.typography-demo .lora-italic {
+  font-family: 'Lora', serif;
+  /* CSS Ex5: font-style italic */
+  font-style: italic;
+  font-size: 1.1rem;
+}
+.typography-demo .bold-lead {
+  /* CSS Ex5: font-weight */
+  font-weight: 800;
+  font-size: 1rem;
+}
+.typography-demo .muted {
+  /* CSS Ex5: text-align center */
+  text-align: center;
+  color: #5a6b5b;
+  font-size: 0.9rem;
+}
+
+/* ─── CSS Ex6: Link and List Styling ───────────────────────── */
+
+/* CSS Ex6: :link — unvisited nav links */
+nav a:link   { color: rgba(255,255,255,.75); }
+/* CSS Ex6: :visited — visited nav links */
+nav a:visited { color: rgba(200,230,205,.85); }
+/* CSS Ex6: :hover state */
+nav a:hover  { color: #ffffff; }
+/* CSS Ex6: :active — click state */
+nav a:active { color: #a8d5b0; }
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-right: 16px;
+  transition: color .2s;
+}
+
+/* CSS Ex6: footer link pseudo-classes */
+footer a:link    { color: #a8d5b0; }
+footer a:visited { color: #c8e6c9; }
+footer a:hover   { color: white; }
+footer a:active  { color: #fff9c4; }
+
+/* CSS Ex6: list-style-type — remove bullets from nav */
+.nav-list {
+  list-style-type: none;
+  list-style-position: inside;
+  padding-left: 0;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-list li { padding: 2px 0; }
+
+/* CSS Ex6: custom bullet list with ::before */
+.custom-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 10px 0;
+}
+.custom-list li {
+  padding: 6px 0 6px 20px;
+  position: relative;
+  border-bottom: 1px solid #d6e4d7;
+  font-size: 0.9rem;
+}
+.custom-list li:last-child { border-bottom: none; }
+.custom-list li::before {
+  content: "▸";
+  color: #3a7d44;
+  position: absolute;
+  left: 0;
+}
+
+/* ─── CSS Ex7: Table Styling ────────────────────────────────── */
+
+/* CSS Ex7: border-collapse, text-align:center */
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.events-table th {
+  background: #285c30;
+  color: white;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.events-table td {
+  padding: 10px 14px;
+  border: 1px solid #d6e4d7;
+  text-align: center;
+  font-size: 0.88rem;
+}
+/* CSS Ex7: zebra striping with nth-child(even) */
+.events-table tr:nth-child(even) td { background: #e8f5e9; }
+.events-table tr:hover td { background: #f0faf1; }
+
+/* ─── CSS Ex8: Box Model & Layout Control ───────────────────── */
+
+/* CSS Ex8: outline on focused form fields */
+.form-demo input:focus,
+.form-demo select:focus,
+.form-demo textarea:focus {
+  outline: 2px solid #3a7d44;
+  outline-offset: 2px;
+}
+.form-demo input,
+.form-demo select,
+.form-demo textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d6e4d7;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+.form-demo label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #2c3e2d;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* CSS Ex8: visibility:hidden vs display:none demo */
+.vis-demo-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.vis-box {
+  background: #e8f5e9;
+  border: 1px solid #d6e4d7;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+/* ─── CSS Ex9: Multi-column Layout ─────────────────────────── */
+
+/* CSS Ex9: newspaper-style multi-column */
+.bulletin-text {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid #d6e4d7;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #5a6b5b;
+}
+
+/* ─── CSS Ex10: Responsive Media Queries ────────────────────── */
+
+/* CSS Ex10: flexible layout with %, vw, vh */
+.container { width: 90%; max-width: 960px; margin: 0 auto; }
+.section-lead { max-width: 60vw; }
+@media (max-width: 576px) { .section-lead { max-width: 100%; } }
+
+/* CSS Ex10: media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  /* CSS Ex10: stack navigation links vertically */
+  .nav-list { flex-direction: column; gap: 2px; }
+  nav { flex-wrap: wrap; }
+  /* CSS Ex10: reduce heading sizes on mobile */
+  h2 { font-size: 1.3rem; }
+  .hero { padding: 40px 0 32px; }
+  .hero h1 { font-size: 1.75rem; }
+  /* CSS Ex10: single-column bulletin on mobile */
+  .bulletin-text { column-count: 1; }
+  /* CSS Ex10: reduce font size on mobile */
+  body { font-size: 15px; }
+  /* CSS Ex10: reduce image sizes on mobile */
+  .gallery-img { width: 140px; height: 90px; }
+}
+@media (max-width: 576px) {
+  .eventCard { margin-bottom: 12px; }
+}
+
+/* ─── Shared layout helpers ─────────────────────────────────── */
+
+section { padding: 40px 0; }
+
+.page-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+footer {
+  background: #285c30;
+  color: rgba(255,255,255,.65);
+  padding: 28px 0;
+  text-align: center;
+  font-size: 0.83rem;
+  margin-top: 40px;
+}
+footer a { text-decoration: none; }
+
+.gallery-img {
+  width: 200px;
+  height: 130px;
+  object-fit: cover;
+  border: 2px solid #d6e4d7;
+  border-radius: 6px;
+  cursor: zoom-in;
+  transition: transform .2s;
+  display: block;
+  margin: 0 auto;
+}
+.gallery-img.enlarged {
+  transform: scale(1.6);
+  position: relative;
+  z-index: 10;
+}
+
+.demo-box {
+  background: white;
+  border: 1px solid #d6e4d7;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.demo-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #3a7d44;
+  margin-bottom: 12px;
+}
+
+button {
+  background: #3a7d44;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 4px;
+}
+button:hover { background: #285c30; }
+button.outline {
+  background: transparent;
+  border: 2px solid #3a7d44;
+  color: #3a7d44;
+}
+button.danger { background: #c62828; }

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!-- HTML Ex1: proper DOCTYPE declaration -->
+<html lang="en">
+<!-- HTML Ex1: lang attribute on <html> -->
+<head>
+  <!-- HTML Ex1: charset + viewport meta tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greenfield Community Portal</title>
+
+  <!-- CSS Ex5: Google Font via <link> (CSS Ex1: external resource) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet" />
+
+  <!-- CSS Ex1: External stylesheet link -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- JS Ex14: jQuery via CDN (for Ex14 tasks) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- HTML Ex3: Internal/embedded <style> in <head> — blue background for #welcomeBanner -->
+  <style>
+    /* HTML Ex3: internal CSS for #welcomeBanner */
+    #welcomeBanner {
+      background-color: #1a6b3c;
+      color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+
+    /* CSS Ex1: Inline style example — one heading is red (see below in body) */
+    /* CSS Ex2: Body background defined here (embedded style) */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f4f7f2;
+      color: #2c3e2d;
+    }
+
+    nav {
+      background: #285c30;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: rgba(255,255,255,.75);
+      margin-right: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: .88rem;
+      transition: color .2s;
+    }
+    nav a:hover { color: white; }
+
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    /* CSS Ex3: element selector on h2 */
+    h2 {
+      color: #285c30;
+      border-bottom: 2px solid #a8d5b0;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+
+    /* HTML Ex3: .highlight class for visual emphasis */
+    .highlight {
+      background: #fffde7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    /* Form styling */
+    form { background: white; padding: 24px; border-radius: 10px; border: 1px solid #d6e4d7; }
+    label { display: block; font-weight: bold; margin-top: 12px; margin-bottom: 4px; }
+    input, select, textarea {
+      width: 100%; padding: 9px 12px; border: 1px solid #c0d6c2;
+      border-radius: 6px; font-size: .95rem; box-sizing: border-box;
+    }
+    /* CSS Ex8: outline on focused form fields */
+    input:focus, select:focus, textarea:focus { outline: 2px solid #3a7d44; }
+    button {
+      margin-top: 14px; background: #3a7d44; color: white;
+      border: none; border-radius: 6px; padding: 10px 24px;
+      font-size: 1rem; cursor: pointer;
+    }
+    button:hover { background: #285c30; }
+    output { display: block; margin-top: 10px; font-weight: bold; color: #3a7d44; }
+
+    /* CSS Ex7: Table styling */
+    table { border-collapse: collapse; width: 100%; }
+    th { background: #285c30; color: white; padding: 10px; text-align: center; }
+    td { padding: 10px; text-align: center; border: 1px solid #d6e4d7; }
+    /* CSS Ex7: zebra striping */
+    tr:nth-child(even) td { background: #e8f5e9; }
+
+    .gallery-img {
+      width: 200px; height: 130px; object-fit: cover;
+      border: 2px solid #d6e4d7; border-radius: 6px;
+      cursor: zoom-in; transition: transform .2s;
+    }
+    .gallery-img.enlarged { transform: scale(1.6); position: relative; z-index: 10; }
+
+    video { width: 100%; border-radius: 10px; border: 1px solid #d6e4d7; }
+    #videoStatus { color: #3a7d44; font-weight: bold; margin-top: 8px; }
+    #geoResult { margin-top: 8px; color: #285c30; font-size: .9rem; }
+    #prefStatus { margin-top: 6px; color: #3a7d44; font-size: .88rem; }
+
+    .error-msg { color: red; font-size: .82rem; display: none; }
+
+    /* Event cards from JS */
+    #eventCards .eventCard { background: white; border: 1px solid #d6e4d7; border-radius: 10px; padding: 18px; margin-bottom: 12px; }
+    #eventCards button { margin-top: 8px; padding: 7px 16px; font-size: .85rem; }
+    #eventCards button:last-child { background: #c62828; margin-left: 6px; }
+    #regMsg { margin-top: 8px; font-weight: bold; min-height: 20px; }
+    #asyncMsg { margin-top: 8px; font-weight: bold; }
+
+    /* JS Ex9: spinner */
+    #loadingSpinner {
+      display: none; width: 18px; height: 18px;
+      border: 2px solid #d0e8d2; border-top-color: #3a7d44;
+      border-radius: 50%; animation: spin .7s linear infinite;
+      vertical-align: middle; margin-left: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    footer {
+      background: #285c30; color: rgba(255,255,255,.7);
+      text-align: center; padding: 24px; margin-top: 60px;
+    }
+    footer a { color: #a8d5b0; text-decoration: none; }
+    footer a:hover { color: white; }
+
+    /* CSS Ex9: Community Bulletin multi-column */
+    .bulletin-text {
+      column-count: 2;
+      column-gap: 30px;
+      column-rule: 1px solid #d6e4d7;
+      font-size: .9rem;
+      line-height: 1.75;
+      color: #5a6b5b;
+    }
+    @media (max-width: 768px) { .bulletin-text { column-count: 1; } }
+  </style>
+</head>
+
+<!-- HTML Ex1: Section comments for Navigation, Main, Footer -->
+<!-- Navigation -->
+<!-- Main Content -->
+<!-- Footer -->
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <!-- HTML Ex2: <nav> with anchor links pointing to matching section IDs -->
+  <nav>
+    <!-- HTML Ex2: anchor tags with href="#sectionId" -->
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#register">Register</a>
+    <a href="#bulletin">Bulletin</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <!-- HTML Ex2: external link in new tab -->
+    <a href="help.html" target="_blank">Help ↗</a>
+  </nav>
+
+
+  <!-- ===== MAIN ===== -->
+
+  <!-- HTML Ex2: section with matching id="home" -->
+  <section id="home">
+    <h2>Home</h2>
+
+    <!-- CSS Ex1: one heading styled red via inline style -->
+    <!-- HTML Ex3: #welcomeBanner with blue background via internal CSS -->
+    <div id="welcomeBanner">
+      <h1 style="color: red;">Your Community, Your Events</h1>
+      <!-- HTML Ex3: inline style on special-offer <span> -->
+      <p style="color: rgb(253, 252, 252);">
+        Find, register, and enjoy local events.
+        <span style="color: red; font-weight: bold;">New events added weekly!</span>
+      </p>
+      <!-- HTML Ex3: .highlight class for visual emphasis -->
+      <p class="highlight" style="color:#2c3e2d;">
+        Greenfield City Council — serving residents since 1995.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- HTML Ex2: section with id="events" -->
+  <section id="events">
+    <h2>Events</h2>
+    <p>Browse upcoming community events. Use the search or category filter below.</p>
+
+    <!-- JS Ex8: keydown / input — quick search by event name -->
+    <input type="search" id="eventSearch"
+           placeholder="🔍 Search events by name…"
+           oninput="handleSearchInput(this)"
+           style="width:100%; margin-bottom:12px;" />
+
+    <!-- JS Ex8: onchange to filter events by category -->
+    <label for="categoryFilter"><strong>Filter by category:</strong></label>
+    <select id="categoryFilter" onchange="handleCategoryFilter(this)"
+            style="width:auto; margin-bottom:16px;">
+      <option value="">— All Events —</option>
+      <option value="workshop">Workshop</option>
+      <option value="cultural">Cultural</option>
+      <option value="sports">Sports</option>
+      <option value="health">Health</option>
+      <option value="music">Music</option>
+    </select>
+
+    <!-- JS Ex7: event cards rendered here by renderEvents() -->
+    <div id="eventCards"></div>
+    <p id="regMsg"></p>
+
+    <!-- JS Ex14: jQuery — fadeIn/fadeOut event cards -->
+    <div style="margin-top:8px;">
+      <button id="registerBtn" onclick="void(0)">jQuery: Hide/Show Cards</button>
+    </div>
+  </section>
+
+
+  <!-- HTML Ex5 + Ex6 + Ex11: Registration form -->
+  <!-- HTML Ex2: section with id="register" -->
+  <section id="register">
+    <h2>Register</h2>
+
+    <!-- HTML Ex5: form with multiple input types -->
+    <!-- JS Ex11: onsubmit wired to handleFormSubmit -->
+    <form id="registrationForm" onsubmit="handleFormSubmit(event)">
+
+      <!-- HTML Ex5: text input with autofocus, required, placeholder -->
+      <label for="regName">Full Name</label>
+      <input type="text" id="regName" name="name"
+             placeholder="Your full name"
+             required autofocus />
+      <span id="nameError" class="error-msg"></span>
+
+      <!-- HTML Ex5: email input -->
+      <label for="regEmail">Email</label>
+      <input type="email" id="regEmail" name="email"
+             placeholder="you@example.com" required />
+      <span id="emailError" class="error-msg"></span>
+
+      <!-- HTML Ex6: onblur phone validation -->
+      <label for="regPhone">Phone Number</label>
+      <input type="text" id="regPhone" name="phone"
+             placeholder="10-digit number"
+             onblur="validatePhone(this)" />
+      <span id="phoneError" class="error-msg">
+        Please enter a valid 10-digit number.
+      </span>
+
+      <!-- HTML Ex5: date input -->
+      <label for="regDate">Preferred Date</label>
+      <input type="date" id="regDate" name="date" required />
+
+      <!-- HTML Ex5: select dropdown — HTML Ex6: onchange to show fee -->
+      <label for="regEvent">Select Event</label>
+      <select id="regEvent" name="event" required onchange="showEventFee(this)">
+        <option value="">— Choose an event —</option>
+        <option value="Baking Workshop"  data-fee="0">Baking Workshop (Free)</option>
+        <option value="Cultural Night"   data-fee="50">Cultural Night (₹50)</option>
+        <option value="Sports Day"       data-fee="0">Sports Day (Free)</option>
+        <option value="Health Camp"      data-fee="30">Health Camp (₹30)</option>
+        <option value="Music Festival"   data-fee="100">Music Festival (₹100)</option>
+      </select>
+      <p id="feeDisplay" style="color:#285c30; font-weight:bold; min-height:18px; margin:4px 0;"></p>
+      <span id="eventError" class="error-msg"></span>
+
+      <!-- HTML Ex5: textarea -->
+      <label for="regMessage">Message (optional)</label>
+      <!-- HTML Ex6: keyup character counter -->
+      <textarea id="regMessage" name="message" rows="3"
+                placeholder="Any special requirements…"
+                onkeyup="countChars(this, 'charCount')"></textarea>
+      <span id="charCount" style="font-size:.78rem; color:#5a6b5b;">0 / 300 characters</span>
+
+      <!-- HTML Ex6: onclick on submit button -->
+      <button type="submit" id="formSubmitBtn"
+              onclick="console.log('Submit button clicked')">
+        Register
+      </button>
+
+      <!-- HTML Ex5: <output> tag for confirmation message -->
+      <output id="formOutput"></output>
+      <!-- JS Ex12: POST status -->
+      <p id="submitStatus" style="font-size:.88rem; margin-top:6px;"></p>
+    </form>
+
+
+    <!-- HTML Ex8: localStorage preferences -->
+    <div style="margin-top:32px; background:white; padding:20px; border-radius:10px; border:1px solid #d6e4d7;">
+      <h3 style="color:#285c30; margin-bottom:10px;">My Preference</h3>
+      <label for="prefSelect">Favourite event type</label>
+      <select id="prefSelect" style="width:auto; display:inline-block; margin-right:10px;">
+        <option value="">— Choose —</option>
+        <option value="workshop">Workshop</option>
+        <option value="cultural">Cultural</option>
+        <option value="sports">Sports</option>
+        <option value="health">Health</option>
+        <option value="music">Music</option>
+      </select>
+      <!-- HTML Ex8: save to localStorage -->
+      <button onclick="savePref()" style="margin-top:0; padding:8px 16px; font-size:.9rem;">Save</button>
+      <!-- HTML Ex8: clear both localStorage and sessionStorage -->
+      <button onclick="clearPrefs()"
+              style="margin-top:0; padding:8px 16px; font-size:.9rem; background:#c62828; margin-left:6px;">
+        Clear Preferences
+      </button>
+      <p id="prefStatus"></p>
+    </div>
+
+
+    <!-- HTML Ex9: Geolocation -->
+    <div style="margin-top:20px; background:white; padding:20px; border-radius:10px; border:1px solid #d6e4d7;">
+      <h3 style="color:#285c30; margin-bottom:8px;">Find Nearby Events</h3>
+      <p style="font-size:.9rem; color:#5a6b5b;">Share your location to find the closest community events.</p>
+      <!-- HTML Ex9: button triggers getCurrentPosition -->
+      <button onclick="findNearby()" style="margin-top:8px;">📍 Find Nearby Events</button>
+      <p id="geoResult"></p>
+    </div>
+
+
+    <!-- JS Ex9: Async fetch demo -->
+    <div style="margin-top:20px; background:white; padding:20px; border-radius:10px; border:1px solid #d6e4d7;">
+      <h3 style="color:#285c30; margin-bottom:8px;">Async Data Fetch</h3>
+      <button onclick="fetchEventsWithPromise()" style="margin-top:0; font-size:.85rem;">
+        Fetch via .then()/.catch()
+      </button>
+      <button onclick="fetchEventsAsync()" style="margin-top:0; font-size:.85rem; margin-left:6px;">
+        Fetch via async/await
+      </button>
+      <span id="loadingSpinner"></span>
+      <p id="asyncMsg"></p>
+    </div>
+  </section>
+
+
+  <!-- HTML Ex2: section id="bulletin" -->
+  <!-- CSS Ex9: multi-column newspaper layout -->
+  <section id="bulletin">
+    <h2>Bulletin</h2>
+    <p>News and updates from Greenfield City Council.</p>
+    <!-- CSS Ex9: column-count:2, column-gap, column-rule -->
+    <div class="bulletin-text">
+      The Greenfield City Council is pleased to announce a series of community events throughout
+      May and June. Residents are encouraged to participate in the upcoming Baking Workshop at
+      the Community Centre on May 18th. Limited seats are available, so early registration is advised.
+
+      The annual Cultural Night returns to Town Hall on May 24th, featuring performances from
+      local dance and music groups. Entry is ₹50 per person, with children under 12 admitted free.
+
+      Sports Day at City Park on June 1st is open to all age groups. Teams can register through
+      this portal. The Health Camp on June 8th will offer free general check-ups, blood pressure
+      monitoring, and dietary advice from qualified professionals.
+
+      The Music Festival on June 15th at the City Amphitheatre promises an evening of live
+      performances. Advance tickets are ₹100. All event proceeds go towards the Community
+      Development Fund, which supports local infrastructure and social programmes.
+    </div>
+  </section>
+
+
+  <!-- HTML Ex4: Image Gallery — table with 2 rows × 3 columns of <img> tags -->
+  <!-- HTML Ex2: section id="gallery" -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <p>A look back at recent community highlights. Double-click any image to enlarge.</p>
+
+    <!-- HTML Ex4: <table> with 2 rows and 3 columns of <img> tags -->
+    <div style="overflow-x:auto;">
+      <table>
+        <caption style="caption-side:bottom; font-size:.78rem; color:#5a6b5b; padding:8px 0;">
+          Recent community events — double-click images to enlarge
+        </caption>
+        <thead>
+          <tr>
+            <th>Food Festival</th>
+            <th>Tree Plantation</th>
+            <th>Sports Day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- HTML Ex4: Row 1 — img with alt, title, class -->
+          <tr>
+            <td>
+              <!-- HTML Ex4: img with alt and title -->
+              <!-- HTML Ex6: ondblclick to enlarge -->
+              <img src="https://placehold.co/200x130/e8f5e9/285c30?text=Food+Festival"
+                   alt="Food Festival community event April 2025"
+                   title="Annual Food Festival — Apr 10, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">Apr 10 · 320 residents</div>
+            </td>
+            <td>
+              <img src="https://placehold.co/200x130/e8f5e9/285c30?text=Tree+Plantation"
+                   alt="Tree Plantation Drive volunteers April 2025"
+                   title="Tree Plantation Drive — Apr 18, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">Apr 18 · 150 volunteers</div>
+            </td>
+            <td>
+              <img src="https://placehold.co/200x130/e8f5e9/285c30?text=Sports+Day"
+                   alt="Youth Sports Day participants April 2025"
+                   title="Youth Sports Day — Apr 25, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">Apr 25 · 200 participants</div>
+            </td>
+          </tr>
+          <!-- HTML Ex4: Row 2 -->
+          <tr>
+            <td>
+              <img src="https://placehold.co/200x130/fff3e0/c45000?text=Art+Fair"
+                   alt="Art and Craft Fair visitors May 2025"
+                   title="Art &amp; Craft Fair — May 2, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">May 2 · 180 visitors</div>
+            </td>
+            <td>
+              <img src="https://placehold.co/200x130/fdecea/c62828?text=Health+Camp"
+                   alt="Health Awareness Camp Town Hall May 2025"
+                   title="Health Camp — May 8, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">May 8 · 400+ residents</div>
+            </td>
+            <td>
+              <img src="https://placehold.co/200x130/fff8e1/e07b39?text=Dance+Show"
+                   alt="Cultural Dance Show Town Hall May 2025"
+                   title="Cultural Dance Show — May 12, 2025"
+                   class="gallery-img"
+                   ondblclick="toggleEnlarge(this)" />
+              <div style="font-size:.75rem; margin-top:4px;">May 12 · 500 attendees</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- HTML Ex7: Video element with oncanplay and onbeforeunload -->
+  <section id="video">
+    <h2>Event Promo Video</h2>
+    <p>Watch a short preview of the upcoming season's events.</p>
+    <p id="videoStatus"></p>
+    <!-- HTML Ex7: <video> with source and controls -->
+    <video controls
+           poster="https://placehold.co/800x400/3a7d44/ffffff?text=Greenfield+Events+2025"
+           oncanplay="videoReady()">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <p style="font-size:.82rem; color:#5a6b5b; margin-top:8px;">
+      If you start filling the registration form and try to leave, you'll be warned.
+    </p>
+  </section>
+
+
+  <!-- HTML Ex2: section id="contact" -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div style="background:white; padding:24px; border-radius:10px; border:1px solid #d6e4d7;">
+      <p><strong>Address:</strong> 12 Council Road, Greenfield City – 500001</p>
+      <p><strong>Phone:</strong> +91 40 2345 6789 &nbsp; (Mon–Sat, 9am–6pm)</p>
+      <p><strong>Email:</strong> events@greenfieldcity.gov</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <!-- HTML Ex1: Footer section comment -->
+  <footer>
+    <p>© 2025 Greenfield City Council · All rights reserved</p>
+    <p style="margin-top:6px;">
+      <!-- CSS Ex6: :link, :visited, :hover, :active applied in styles.css -->
+      <a href="#home">Home</a> &nbsp;·&nbsp;
+      <a href="#events">Events</a> &nbsp;·&nbsp;
+      <a href="#register">Register</a> &nbsp;·&nbsp;
+      <!-- HTML Ex2: external link with target="_blank" -->
+      <a href="help.html" target="_blank">Help ↗</a>
+    </p>
+  </footer>
+
+
+  <!-- JS Ex1: Use <script src="main.js"> — all JS logic lives in main.js -->
+  <script src="main.js"></script>
+
+  <!-- JS Ex14: jQuery tasks -->
+  <script>
+    // JS Ex14: $('#registerBtn').click(...) to handle click events
+    $('#registerBtn').click(function () {
+      // JS Ex14: .fadeOut() and .fadeIn() on event cards
+      const cards = $('#eventCards .eventCard');
+      if (cards.first().is(':visible')) {
+        cards.fadeOut(400);
+        $(this).text('jQuery: Show Cards');
+      } else {
+        cards.fadeIn(400);
+        $(this).text('jQuery: Hide/Show Cards');
+      }
+    });
+    // JS Ex14: One benefit of React/Vue over jQuery:
+    // React uses a reactive component model — the UI automatically updates when data changes,
+    // eliminating the need for manual DOM manipulation like fadeIn/fadeOut.
+    console.log("JS Ex14: jQuery loaded. React/Vue benefit — reactive UI avoids manual DOM updates.");
+  </script>
+
+</body>
+</html>
